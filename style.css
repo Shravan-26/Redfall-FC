@@ -1,8 +1,9 @@
 /* Global Styles */
 :root {
-  --red: #c62828;
-  --blue: #1565c0;
-  --white: #f9f9f9;
+  --red: #d32f2f;
+  --blue: #1976d2;
+  --white: #ffffff;
+  --gray: #f4f4f4;
   --dark: #222;
 }
 
@@ -14,7 +15,7 @@ body {
   line-height: 1.6;
 }
 
-/* Sticky Navbar */
+/* Navbar */
 .navbar {
   background: var(--blue);
   color: var(--white);
@@ -49,9 +50,24 @@ body {
   color: var(--red);
 }
 
-/* Hero Section */
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+/* Hero */
 .hero {
-  background: linear-gradient(rgba(21,101,192,0.7), rgba(198,40,40,0.7)),
+  background: linear-gradient(rgba(25,118,210,0.7), rgba(211,47,47,0.7)),
               url('stadium.jpg') center/cover no-repeat;
   color: var(--white);
   text-align: center;
@@ -81,62 +97,92 @@ body {
   background: var(--blue);
 }
 
-/* Club Story Section */
-.club-story {
-  background: var(--red);
-  color: var(--white);
-  padding: 50px 20px;
+/* Sections */
+section {
+  padding: 60px 20px;
   text-align: center;
 }
 
-.club-story h2 {
-  color: var(--white);
+section h2 {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* Club Preview / History */
+.club-preview, .club-history {
+  background: var(--white);
+  color: var(--dark);
+}
+
+.club-preview p, .club-history p {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Values */
+.club-values {
+  background: var(--gray);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.value-card {
+  background: var(--white);
+  border: 1px solid var(--blue);
+  border-radius: 8px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.value-card h3 {
+  color: var(--red);
+  margin-bottom: 10px;
+}
+
+.value-card p {
+  color: var(--dark);
+  font-size: 1rem;
+}
+
+/* Social Club */
+.social-club {
+  background: var(--white);
+  color: var(--dark);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.social-club h2 {
+  color: var(--blue);
   margin-bottom: 15px;
 }
 
-.club-story p {
+.social-club p {
   max-width: 700px;
   margin: 0 auto;
   font-size: 1.1rem;
 }
 
-/* About Preview */
-.about-preview {
-  padding: 50px 20px;
-  text-align: center;
-}
-
-.about-preview h2 {
-  color: var(--blue);
-}
-
-.about-preview p {
-  max-width: 700px;
-  margin: 0 auto 20px;
-}
-
-.btn-secondary {
-  background: var(--blue);
-  color: var(--white);
-  padding: 8px 16px;
-  text-decoration: none;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-
-.btn-secondary:hover {
-  background: var(--red);
-}
-
 /* Join Us Section */
 .join-us {
-  background: var(--blue);
-  color: var(--white);
-  padding: 50px 20px;
+  background: var(--gray);
+  color: var(--dark);
+  padding: 60px 20px;
   text-align: center;
 }
 
 .join-us h2 {
+  color: var(--red);
   margin-bottom: 15px;
 }
 
@@ -147,13 +193,13 @@ body {
 }
 
 .join-us .btn {
-  background: var(--red);
+  background: var(--blue);
   color: var(--white);
 }
 
 .join-us .btn:hover {
-  background: var(--white);
-  color: var(--blue);
+  background: var(--red);
+  color: var(--white);
 }
 
 /* Footer */
@@ -166,21 +212,6 @@ footer {
 }
 
 /* Responsive Layout */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  cursor: pointer;
-  gap: 5px;
-}
-
-.hamburger span {
-  width: 25px;
-  height: 3px;
-  background: var(--white);
-  border-radius: 2px;
-}
-
-/* Mobile Styles */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -211,10 +242,15 @@ footer {
     font-size: 1rem;
   }
 
-  .club-story p,
-  .about-preview p,
+  .club-preview p,
+  .club-history p,
+  .social-club p,
   .join-us p {
     font-size: 1rem;
     padding: 0 10px;
+  }
+
+  .values-grid {
+    grid-template-columns: 1fr;
   }
 }
