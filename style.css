@@ -1,0 +1,220 @@
+/* Global Styles */
+:root {
+  --red: #c62828;
+  --blue: #1565c0;
+  --white: #f9f9f9;
+  --dark: #222;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: var(--white);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+/* Sticky Navbar */
+.navbar {
+  background: var(--blue);
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: var(--white);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  color: var(--red);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(rgba(21,101,192,0.7), rgba(198,40,40,0.7)),
+              url('stadium.jpg') center/cover no-repeat;
+  color: var(--white);
+  text-align: center;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: var(--red);
+  color: var(--white);
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--blue);
+}
+
+/* Club Story Section */
+.club-story {
+  background: var(--red);
+  color: var(--white);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.club-story h2 {
+  color: var(--white);
+  margin-bottom: 15px;
+}
+
+.club-story p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* About Preview */
+.about-preview {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.about-preview h2 {
+  color: var(--blue);
+}
+
+.about-preview p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+
+.btn-secondary {
+  background: var(--blue);
+  color: var(--white);
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--red);
+}
+
+/* Join Us Section */
+.join-us {
+  background: var(--blue);
+  color: var(--white);
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.join-us h2 {
+  margin-bottom: 15px;
+}
+
+.join-us p {
+  max-width: 700px;
+  margin: 0 auto 20px;
+  font-size: 1.1rem;
+}
+
+.join-us .btn {
+  background: var(--red);
+  color: var(--white);
+}
+
+.join-us .btn:hover {
+  background: var(--white);
+  color: var(--blue);
+}
+
+/* Footer */
+footer {
+  background: var(--dark);
+  color: var(--white);
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+}
+
+/* Responsive Layout */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: var(--white);
+  border-radius: 2px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: var(--blue);
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 200px;
+    padding: 20px;
+    gap: 15px;
+    border-radius: 4px;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .club-story p,
+  .about-preview p,
+  .join-us p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+}
