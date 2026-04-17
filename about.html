@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Redfall FC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="Redfall.png" alt="Redfall FC Logo">
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- About Hero -->
+  <section class="hero about-hero">
+    <h1>About Redfall FC</h1>
+    <p>Founded in Waterfall by residents in 2017, Redfall FC is a social football club built on passion, pride, and friendship.</p>
+  </section>
+
+  <!-- History -->
+  <section class="club-history">
+    <h2>Our Story</h2>
+    <p>From humble beginnings in 2017/2018, Redfall FC has grown into a welcoming community club. Players have come and gone, but the heart of the team remains — a family united by football and the pride of Waterfall.</p>
+  </section>
+
+  <!-- Values Grid -->
+  <section class="club-values">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card"><h3>Community</h3><p>We bring people together on and off the pitch.</p></div>
+      <div class="value-card"><h3>Respect</h3><p>We play fair and support one another.</p></div>
+      <div class="value-card"><h3>Passion</h3><p>We celebrate the beautiful game with pride.</p></div>
+      <div class="value-card"><h3>Friendship</h3><p>We build bonds that last beyond match day.</p></div>
+    </div>
+  </section>
+
+  <!-- Social Club -->
+  <section class="social-club">
+    <h2>A Social Club</h2>
+    <p>Redfall FC is more than competition — it’s about connection. We welcome players of all skill levels, supporters, and sponsors. Whether you’re here to play, cheer, or simply belong, Redfall FC has a place for you.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Redfall FC | Community, Pride, Passion</p>
+  </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
