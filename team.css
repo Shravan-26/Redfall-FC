@@ -87,17 +87,27 @@
   color: #000;         /* dark text for readability */
   font-size: 0.9rem;   /* smaller text */
   font-weight: bold;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
   touch-action: none;
   user-select: none;
   border: 1px solid #000; /* thin border for visibility */
 }
 
+/* Normal hover */
 #availablePlayers li:hover {
-  background: #d5d5d5; /* slightly darker gray on hover */
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle hover shadow */
+  background: #d5d5d5; /* slightly darker gray */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
+/* Dragging state */
+#availablePlayers li.dragging {
+  background: #007bff; /* Bright blue highlight */
+  color: #fff;
+  transform: scale(1.05); /* Slight enlargement */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  opacity: 0.9;
+  cursor: grabbing;
+}
 
 /* Drag handle */
 .drag-handle {
@@ -108,8 +118,15 @@
   user-select: none;
 }
 
-#availablePlayers li:hover {
-  background: #218838; /* Darker green on hover */
+/* Drop zone hover effect */
+.team.drop-hover {
+  border: 2px dashed #ff9800; /* Orange highlight for Team A */
+  background: rgba(255, 152, 0, 0.1);
+}
+
+.team-b.drop-hover {
+  border: 2px dashed #fdd835; /* Yellow highlight for Team B */
+  background: rgba(253, 216, 53, 0.1);
 }
 
 /* Teams Layout */
