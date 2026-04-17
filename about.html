@@ -27,23 +27,35 @@
   <!-- About Hero -->
   <section class="hero about-hero">
     <h1>About Redfall FC</h1>
-    <p>Founded in Waterfall by residents in 2017, Redfall FC is a social football club built on passion, pride, and friendship.</p>
+    <p>Founded in Waterfall in 2017, Redfall FC is a social football club built on passion, pride, and friendship.</p>
   </section>
 
   <!-- History -->
   <section class="club-history">
     <h2>Our Story</h2>
-    <p>From humble beginnings in 2017/2018, Redfall FC has grown into a welcoming community club. Players have come and gone, but the heart of the team remains — a family united by football and the pride of Waterfall.</p>
+    <p>From humble beginnings in 2017, Redfall FC has grown into a welcoming community club. Players have come and gone, but the heart of the team remains — a family united by football and the pride of Waterfall.</p>
   </section>
 
   <!-- Values Grid -->
   <section class="club-values">
     <h2>Our Values</h2>
     <div class="values-grid">
-      <div class="value-card"><h3>Community</h3><p>We bring people together on and off the pitch.</p></div>
-      <div class="value-card"><h3>Respect</h3><p>We play fair and support one another.</p></div>
-      <div class="value-card"><h3>Passion</h3><p>We celebrate the beautiful game with pride.</p></div>
-      <div class="value-card"><h3>Friendship</h3><p>We build bonds that last beyond match day.</p></div>
+      <div class="value-card">
+        <h3>Community</h3>
+        <p>We bring people together on and off the pitch.</p>
+      </div>
+      <div class="value-card">
+        <h3>Respect</h3>
+        <p>We play fair and support one another.</p>
+      </div>
+      <div class="value-card">
+        <h3>Passion</h3>
+        <p>We celebrate the beautiful game with pride.</p>
+      </div>
+      <div class="value-card">
+        <h3>Friendship</h3>
+        <p>We build bonds that last beyond match day.</p>
+      </div>
     </div>
   </section>
 
@@ -65,6 +77,20 @@
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
+
+    // Section fade-in animation
+    const sections = document.querySelectorAll("section");
+    const revealOnScroll = () => {
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
   </script>
 </body>
 </html>
+
