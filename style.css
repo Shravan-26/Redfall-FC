@@ -254,3 +254,87 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* Contact Hero */
+.contact-hero {
+  background: var(--red);
+  color: var(--white);
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.contact-hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+}
+
+.contact-hero p {
+  font-size: 1.1rem;
+}
+
+/* Contact Form */
+.contact-form {
+  background: var(--gray);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contact-form h2 {
+  color: var(--blue);
+  margin-bottom: 20px;
+}
+
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--dark);
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+button.btn {
+  display: block;
+  margin: 0 auto;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+}
+
+button.btn:hover {
+  background: var(--red);
+}
+
+/* Club Details */
+.club-details {
+  background: var(--white);
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.club-details h2 {
+  color: var(--red);
+  margin-bottom: 20px;
+}
+
+.club-details p {
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
