@@ -100,24 +100,32 @@
   window.addEventListener("scroll", revealOnScroll);
   revealOnScroll();
 
-  // Drag-and-drop helper
+  // Drag-and-drop helper with drag handle
   const makeDraggable = (li, id) => {
     li.id = id;
     li.draggable = true;
-    li.addEventListener('dragstart', e => {
+
+    // Add drag handle
+    const handle = document.createElement('span');
+    handle.classList.add('drag-handle');
+    handle.textContent = '☰';
+    li.prepend(handle);
+
+    // Desktop drag
+    handle.addEventListener('dragstart', e => {
       e.dataTransfer.setData('text/plain', li.id);
     });
 
     // --- Mobile touch support ---
     let draggedItem = null;
 
-    li.addEventListener('touchstart', (e) => {
+    handle.addEventListener('touchstart', (e) => {
       draggedItem = li;
       draggedItem.classList.add('dragging');
       e.preventDefault(); // prevent scrolling
     });
 
-    li.addEventListener('touchmove', (e) => {
+    handle.addEventListener('touchmove', (e) => {
       const touch = e.touches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
 
@@ -129,7 +137,7 @@
       });
     });
 
-    li.addEventListener('touchend', (e) => {
+    handle.addEventListener('touchend', (e) => {
       const touch = e.changedTouches[0];
       const target = document.elementFromPoint(touch.clientX, touch.clientY);
 
