@@ -54,10 +54,12 @@
       </div>
     </div>
 
+    <!-- Sticky footer bar buttons -->
     <div class="buttons">
       <button id="saveTeams">Save Teams</button>
       <button id="clearTeams">Clear Teams</button>
       <button id="downloadTeams">Download Teams</button>
+      <button id="backToTop">Back to Top</button>
     </div>
   </section>
 
@@ -188,7 +190,13 @@
 
       URL.revokeObjectURL(url);
     });
+
+    // Back to Top button
+    document.getElementById('backToTop').addEventListener('click', () => {
+      document.getElementById('team-management').scrollIntoView({ behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
+
 
