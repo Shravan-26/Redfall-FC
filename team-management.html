@@ -81,134 +81,168 @@
     <p>&copy; 2026 Redfall FC | Community, Pride, Passion</p>
   </footer>
 
-  <!-- Scripts -->
-  <script>
-    // Mobile menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const navLinks = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+<!-- Scripts -->
+<script>
+  // Mobile menu toggle
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  // Section fade-in animation
+  const sections = document.querySelectorAll("section");
+  const revealOnScroll = () => {
+    sections.forEach(sec => {
+      const rect = sec.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 100) {
+        sec.classList.add("visible");
+      }
+    });
+  };
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll();
+
+  // Drag-and-drop helper
+  const makeDraggable = (li, id) => {
+    li.id = id;
+    li.draggable = true;
+    li.addEventListener('dragstart', e => {
+      e.dataTransfer.setData('text/plain', li.id);
     });
 
-    // Section fade-in animation
-    const sections = document.querySelectorAll("section");
-    const revealOnScroll = () => {
-      sections.forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          sec.classList.add("visible");
+    // --- Mobile touch support ---
+    let draggedItem = null;
+
+    li.addEventListener('touchstart', (e) => {
+      draggedItem = li;
+      draggedItem.classList.add('dragging');
+      e.preventDefault(); // prevent scrolling
+    });
+
+    li.addEventListener('touchmove', (e) => {
+      const touch = e.touches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      document.querySelectorAll('.teams ul').forEach(zone => {
+        zone.classList.remove('drag-over');
+        if (zone.contains(target) || zone === target) {
+          zone.classList.add('drag-over');
         }
       });
-    };
-    window.addEventListener("scroll", revealOnScroll);
-    revealOnScroll();
+    });
 
-    // Drag-and-drop helper
-    const makeDraggable = (li, id) => {
-      li.id = id;
-      li.draggable = true;
-      li.addEventListener('dragstart', e => {
-        e.dataTransfer.setData('text/plain', li.id);
+    li.addEventListener('touchend', (e) => {
+      const touch = e.changedTouches[0];
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+      if (target && target.tagName === 'UL' && target.closest('.teams')) {
+        target.appendChild(draggedItem);
+      }
+      if (draggedItem) draggedItem.classList.remove('dragging');
+      draggedItem = null;
+
+      document.querySelectorAll('.teams ul').forEach(zone => zone.classList.remove('drag-over'));
+    });
+  };
+
+  const lists = document.querySelectorAll('#availablePlayers, #teamA, #teamB');
+  lists.forEach(list => {
+    list.addEventListener('dragover', e => {
+      e.preventDefault();
+      list.classList.add('drag-over');
+    });
+    list.addEventListener('dragleave', () => list.classList.remove('drag-over'));
+    list.addEventListener('drop', e => {
+      e.preventDefault();
+      const id = e.dataTransfer.getData('text/plain');
+      const dragged = document.getElementById(id);
+      if (dragged) list.appendChild(dragged);
+      list.classList.remove('drag-over');
+    });
+  });
+
+  // Add player manually
+  document.getElementById('addPlayer').addEventListener('click', () => {
+    const name = document.getElementById('playerName').value.trim();
+    if (!name) return;
+    const li = document.createElement('li');
+    li.textContent = name;
+    makeDraggable(li, 'player-' + Date.now());
+    document.getElementById('availablePlayers').appendChild(li);
+    document.getElementById('playerName').value = '';
+  });
+
+  // Save teams
+  document.getElementById('saveTeams').addEventListener('click', () => {
+    const teamA = [...document.querySelectorAll('#teamA li')].map(li => li.textContent);
+    const teamB = [...document.querySelectorAll('#teamB li')].map(li => li.textContent);
+    const available = [...document.querySelectorAll('#availablePlayers li')].map(li => li.textContent);
+
+    localStorage.setItem('teamA', JSON.stringify(teamA));
+    localStorage.setItem('teamB', JSON.stringify(teamB));
+    localStorage.setItem('availablePlayers', JSON.stringify(available));
+
+    alert('Teams saved!');
+  });
+
+  // Load teams
+  window.addEventListener('load', () => {
+    const teamA = JSON.parse(localStorage.getItem('teamA')) || [];
+    const teamB = JSON.parse(localStorage.getItem('teamB')) || [];
+    const available = JSON.parse(localStorage.getItem('availablePlayers')) || [];
+
+    const rebuildList = (list, items, prefix) => {
+      list.innerHTML = '';
+      items.forEach((player, i) => {
+        const li = document.createElement('li');
+        li.textContent = player;
+        makeDraggable(li, prefix + '-' + i);
+        list.appendChild(li);
       });
     };
 
-    const lists = document.querySelectorAll('#availablePlayers, #teamA, #teamB');
-    lists.forEach(list => {
-      list.addEventListener('dragover', e => {
-        e.preventDefault();
-        list.classList.add('drag-over');
-      });
-      list.addEventListener('dragleave', () => list.classList.remove('drag-over'));
-      list.addEventListener('drop', e => {
-        e.preventDefault();
-        const id = e.dataTransfer.getData('text/plain');
-        const dragged = document.getElementById(id);
-        if (dragged) list.appendChild(dragged);
-        list.classList.remove('drag-over');
-      });
-    });
+    rebuildList(document.getElementById('teamA'), teamA, 'teamA');
+    rebuildList(document.getElementById('teamB'), teamB, 'teamB');
+    rebuildList(document.getElementById('availablePlayers'), available, 'available');
+  });
 
-    // Add player manually
-    document.getElementById('addPlayer').addEventListener('click', () => {
-      const name = document.getElementById('playerName').value.trim();
-      if (!name) return;
-      const li = document.createElement('li');
-      li.textContent = name;
-      makeDraggable(li, 'player-' + Date.now());
-      document.getElementById('availablePlayers').appendChild(li);
-      document.getElementById('playerName').value = '';
-    });
+  // Clear teams
+  document.getElementById('clearTeams').addEventListener('click', () => {
+    localStorage.removeItem('teamA');
+    localStorage.removeItem('teamB');
+    localStorage.removeItem('availablePlayers');
+    document.getElementById('teamA').innerHTML = '';
+    document.getElementById('teamB').innerHTML = '';
+    document.getElementById('availablePlayers').innerHTML = '';
+    alert('Teams cleared!');
+  });
 
-    // Save teams
-    document.getElementById('saveTeams').addEventListener('click', () => {
-      const teamA = [...document.querySelectorAll('#teamA li')].map(li => li.textContent);
-      const teamB = [...document.querySelectorAll('#teamB li')].map(li => li.textContent);
-      const available = [...document.querySelectorAll('#availablePlayers li')].map(li => li.textContent);
+  // Download teams
+  document.getElementById('downloadTeams').addEventListener('click', () => {
+    const teamA = [...document.querySelectorAll('#teamA li')].map(li => li.textContent);
+    const teamB = [...document.querySelectorAll('#teamB li')].map(li => li.textContent);
 
-      localStorage.setItem('teamA', JSON.stringify(teamA));
-      localStorage.setItem('teamB', JSON.stringify(teamB));
-      localStorage.setItem('availablePlayers', JSON.stringify(available));
+    let content = "Redfall FC Matchday Teams\n\n";
+    content += "Team A:\n" + (teamA.length ? teamA.join("\n") : "No players selected") + "\n\n";
+    content += "Team B:\n" + (teamB.length ? teamB.join("\n") : "No players selected") + "\n";
 
-      alert('Teams saved!');
-    });
+    const blob = new Blob([content], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
 
-    // Load teams
-    window.addEventListener('load', () => {
-      const teamA = JSON.parse(localStorage.getItem('teamA')) || [];
-      const teamB = JSON.parse(localStorage.getItem('teamB')) || [];
-      const available = JSON.parse(localStorage.getItem('availablePlayers')) || [];
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "RedfallFC_Teams.txt";
+    a.click();
 
-      const rebuildList = (list, items, prefix) => {
-        list.innerHTML = '';
-        items.forEach((player, i) => {
-          const li = document.createElement('li');
-          li.textContent = player;
-          makeDraggable(li, prefix + '-' + i);
-          list.appendChild(li);
-        });
-      };
+    URL.revokeObjectURL(url);
+  });
 
-      rebuildList(document.getElementById('teamA'), teamA, 'teamA');
-      rebuildList(document.getElementById('teamB'), teamB, 'teamB');
-      rebuildList(document.getElementById('availablePlayers'), available, 'available');
-    });
-
-    // Clear teams
-    document.getElementById('clearTeams').addEventListener('click', () => {
-      localStorage.removeItem('teamA');
-      localStorage.removeItem('teamB');
-      localStorage.removeItem('availablePlayers');
-      document.getElementById('teamA').innerHTML = '';
-      document.getElementById('teamB').innerHTML = '';
-      document.getElementById('availablePlayers').innerHTML = '';
-      alert('Teams cleared!');
-    });
-
-    // Download teams
-    document.getElementById('downloadTeams').addEventListener('click', () => {
-      const teamA = [...document.querySelectorAll('#teamA li')].map(li => li.textContent);
-      const teamB = [...document.querySelectorAll('#teamB li')].map(li => li.textContent);
-
-      let content = "Redfall FC Matchday Teams\n\n";
-      content += "Team A:\n" + (teamA.length ? teamA.join("\n") : "No players selected") + "\n\n";
-      content += "Team B:\n" + (teamB.length ? teamB.join("\n") : "No players selected") + "\n";
-
-      const blob = new Blob([content], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "RedfallFC_Teams.txt";
-      a.click();
-
-      URL.revokeObjectURL(url);
-    });
-
-    // Back to Top button
-    document.getElementById('backToTop').addEventListener('click', () => {
-      document.getElementById('team-management').scrollIntoView({ behavior: 'smooth' });
-    });
-  </script>
+  // Back to Top button
+  document.getElementById('backToTop').addEventListener('click', () => {
+    document.getElementById('team-management').scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
 </body>
 </html>
 
