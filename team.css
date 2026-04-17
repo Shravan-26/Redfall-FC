@@ -9,13 +9,16 @@
 /* Add Player Section */
 .add-player {
   margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
 }
 
 .add-player input {
+  flex: 1;
   padding: 8px;
   border-radius: 4px;
   border: 1px solid #ccc;
-  margin-right: 8px;
+  font-size: 1rem;
 }
 
 .add-player button {
@@ -42,7 +45,7 @@
 #availablePlayers li {
   background: #28a745; /* Bright green */
   margin: 5px 0;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
   cursor: grab;
   color: #fff;
@@ -81,7 +84,7 @@
 .teams li {
   background: #17a2b8; /* Bright teal */
   margin: 5px 0;
-  padding: 8px;
+  padding: 10px;
   border-radius: 4px;
   cursor: grab;
   color: #fff;
@@ -97,13 +100,15 @@
   border: 2px dashed #fff;
 }
 
-/* Buttons */
+/* Buttons (Desktop Default) */
 .buttons {
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
 }
 
 .buttons button {
-  margin-right: 10px;
+  flex: 1;
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -116,4 +121,53 @@
 
 .buttons button:hover {
   background: #e64a19; /* Darker orange on hover */
+}
+
+/* Sticky footer bar for mobile */
+@media (max-width: 768px) {
+  .add-player {
+    flex-direction: column;
+  }
+
+  .add-player input,
+  .add-player button {
+    width: 100%;
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .teams {
+    flex-direction: column;   /* stack Team A and Team B vertically */
+    gap: 20px;
+  }
+
+  .teams li {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .buttons {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--primary-color);
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 8px;
+    box-shadow: 0 -2px 6px rgba(0,0,0,0.2);
+    z-index: 1000;
+  }
+
+  .buttons button {
+    flex: 1;
+    font-size: 0.9rem;
+    padding: 12px;
+  }
+
+  /* Add spacing at bottom of page so content isn't hidden behind sticky bar */
+  #team-management {
+    padding-bottom: 100px;
+  }
 }
