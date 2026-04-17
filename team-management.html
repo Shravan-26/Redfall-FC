@@ -167,16 +167,25 @@
     });
   });
 
-  // Add player manually
-  document.getElementById('addPlayer').addEventListener('click', () => {
-    const name = document.getElementById('playerName').value.trim();
-    if (!name) return;
-    const li = document.createElement('li');
-    li.textContent = name;
-    makeDraggable(li, 'player-' + Date.now());
-    document.getElementById('availablePlayers').appendChild(li);
-    document.getElementById('playerName').value = '';
-  });
+// Add player manually
+document.getElementById('addPlayer').addEventListener('click', () => {
+  const name = document.getElementById('playerName').value.trim();
+  if (!name) return;
+
+  const li = document.createElement('li');
+  li.textContent = name;
+
+  // Apply consistent styling (smaller size)
+  li.style.fontSize = "0.9rem";
+  li.style.padding = "10px";
+
+  // Make draggable with handle
+  makeDraggable(li, 'player-' + Date.now());
+
+  document.getElementById('availablePlayers').appendChild(li);
+  document.getElementById('playerName').value = '';
+});
+
 
   // Save teams
   document.getElementById('saveTeams').addEventListener('click', () => {
