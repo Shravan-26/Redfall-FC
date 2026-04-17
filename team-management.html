@@ -100,7 +100,7 @@
   window.addEventListener("scroll", revealOnScroll);
   revealOnScroll();
 
-  // Drag-and-drop helper with drag handle
+  // Drag-and-drop helper with ghost element
   const makeDraggable = (li, id) => {
     li.id = id;
     li.draggable = true;
@@ -116,24 +116,37 @@
       e.dataTransfer.setData('text/plain', li.id);
       li.classList.add('dragging');
     });
-
     li.addEventListener('dragend', () => {
       li.classList.remove('dragging');
     });
 
-    // --- Mobile touch support ---
+    // --- Mobile touch support with ghost element ---
     let draggedItem = null;
+    let ghost = null;
 
     handle.addEventListener('touchstart', (e) => {
       draggedItem = li;
       draggedItem.classList.add('dragging');
-      e.preventDefault(); // prevent scrolling
+      e.preventDefault();
+
+      // Create ghost element
+      ghost = li.cloneNode(true);
+      ghost.style.position = 'fixed';
+      ghost.style.pointerEvents = 'none';
+      ghost.style.opacity = '0.8';
+      ghost.style.zIndex = '9999';
+      ghost.style.width = li.offsetWidth + 'px';
+      ghost.style.transition = 'transform 0.15s ease'; // smooth movement
+      document.body.appendChild(ghost);
     });
 
     handle.addEventListener('touchmove', (e) => {
+      if (!ghost) return;
       const touch = e.touches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
+      ghost.style.left = touch.clientX - ghost.offsetWidth / 2 + 'px';
+      ghost.style.top = touch.clientY - ghost.offsetHeight / 2 + 'px';
 
+      const target = document.elementFromPoint(touch.clientX, touch.clientY);
       document.querySelectorAll('.teams ul').forEach(zone => {
         zone.classList.remove('drag-over');
         if (zone.contains(target) || zone === target) {
@@ -153,10 +166,16 @@
       draggedItem = null;
 
       document.querySelectorAll('.teams ul').forEach(zone => zone.classList.remove('drag-over'));
+
+      // Remove ghost
+      if (ghost) {
+        ghost.remove();
+        ghost = null;
+      }
     });
   };
 
-  // Drop zone events (desktop + mobile highlight)
+  // Drop zone events
   const lists = document.querySelectorAll('#availablePlayers, #teamA, #teamB');
   lists.forEach(list => {
     list.addEventListener('dragover', e => {
@@ -181,11 +200,9 @@
     const li = document.createElement('li');
     li.textContent = name;
 
-    // Apply consistent styling
     li.style.fontSize = "0.9rem";
     li.style.padding = "10px";
 
-    // Make draggable with handle
     makeDraggable(li, 'player-' + Date.now());
 
     document.getElementById('availablePlayers').appendChild(li);
