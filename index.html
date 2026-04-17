@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Sticky Navbar -->
+  <!-- Navbar -->
   <header class="navbar">
     <div class="logo">
       <img src="Redfall.png" alt="Redfall FC Logo">
@@ -19,33 +19,31 @@
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
   </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <h1>Welcome to Redfall FC</h1>
-    <p>Founded in Waterfall by local residents, Redfall FC is more than a football club — it’s a community where friendships are built and passion for the game thrives.</p>
-    <a href="contact.html" class="btn">Get in Touch</a>
+    <div class="hero-content">
+      <h1>Welcome to Redfall FC</h1>
+      <p>Waterfall’s community football club — where passion meets friendship since 2017.</p>
+      <a href="about.html" class="btn">Discover Our Story</a>
+    </div>
   </section>
 
-  <!-- Club Story -->
-  <section class="club-story">
+  <!-- Club Story Preview -->
+  <section class="club-preview">
     <h2>Our Journey</h2>
-    <p>Since 2017/2018, Redfall FC has grown from a small group of residents into a vibrant social football club. Over the years, we’ve gained and lost players, but our spirit has remained strong — united by the love of football and the pride of Waterfall.</p>
+    <p>Founded by residents of Waterfall, Redfall FC has grown into a vibrant social football club. Over the years, players have come and gone, but our spirit remains strong — united by the love of football and community pride.</p>
   </section>
 
-  <!-- About Preview -->
-  <section class="about-preview">
-    <h2>About Us</h2>
-    <p>We believe in teamwork, respect, and community. Whether on the pitch or off it, Redfall FC is about bringing people together.</p>
-    <a href="about.html" class="btn-secondary">Learn More</a>
-  </section>
-
-  <!-- Join Us Section -->
+  <!-- Join Us -->
   <section class="join-us">
     <h2>Join Us</h2>
-    <p>Redfall FC welcomes new players, supporters, and sponsors. Whether you want to play, cheer from the sidelines, or help grow our club, there’s a place for you here.</p>
-    <a href="contact.html" class="btn">Become Part of the Team</a>
+    <p>Whether you’re a player, supporter, or sponsor, there’s a place for you at Redfall FC.</p>
+    <a href="contact.html" class="btn">Get Involved</a>
   </section>
 
   <!-- Footer -->
@@ -57,10 +55,10 @@
   <script>
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
   </script>
 </body>
 </html>
+
