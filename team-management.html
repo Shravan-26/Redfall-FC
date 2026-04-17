@@ -32,46 +32,49 @@
     <p>Enter player names and drag them into sides for matchday.</p>
   </section>
 
-  <!-- Team Management -->
-  <section id="team-management">
-    <!-- Legend -->
-<div class="legend">
-  <div class="legend-item teamA">
-    <span class="badge"></span> Team A
+ <!-- Team Management -->
+<section id="team-management">
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item teamA">
+      <span class="badge"></span> Team A
+    </div>
+    <div class="legend-item teamB">
+      <span class="badge"></span> Team B
+    </div>
   </div>
-  <div class="legend-item teamB">
-    <span class="badge"></span> Team B
-  </div>
-</div>
     
-    <h2>Add Players</h2>
-    <div class="add-player">
-      <input type="text" id="playerName" placeholder="Enter player name">
-      <button id="addPlayer">Add Player</button>
-    </div>
+  <h2>Available Players</h2>
+  <ul id="availablePlayers"></ul>
 
-    <h2>Available Players</h2>
-    <ul id="availablePlayers"></ul>
-
-    <div class="teams">
-      <div>
-        <h3>Team A</h3>
-        <ul id="teamA"></ul>
-      </div>
-      <div>
-        <h3>Team B</h3>
-        <ul id="teamB"></ul>
-      </div>
+  <div class="teams">
+    <div>
+      <h3>Team A</h3>
+      <ul id="teamA"></ul>
     </div>
-
-    <!-- Sticky footer bar buttons -->
-    <div class="buttons">
-      <button id="saveTeams">Save Teams</button>
-      <button id="clearTeams">Clear Teams</button>
-      <button id="downloadTeams">Download Teams</button>
-      <button id="backToTop">Back to Top</button>
+    <div>
+      <h3>Team B</h3>
+      <ul id="teamB"></ul>
     </div>
-  </section>
+  </div>
+
+  <!-- Sticky footer bar buttons -->
+  <div class="buttons">
+    <button id="saveTeams">Save Teams</button>
+    <button id="clearTeams">Clear Teams</button>
+    <button id="downloadTeams">Download Teams</button>
+    <button id="backToTop">Back to Top</button>
+  </div>
+
+  <!-- Floating Add Player bar -->
+  <div class="add-player" id="addPlayerBar">
+    <input type="text" id="playerName" placeholder="Enter player name">
+    <button id="addPlayer">Add Player</button>
+  </div>
+
+  <!-- Toggle button for mobile -->
+  <button class="toggle-add-player" id="toggleAddPlayer">+</button>
+</section>
 
   <!-- Footer -->
   <footer>
@@ -136,7 +139,7 @@
       ghost.style.opacity = '0.8';
       ghost.style.zIndex = '9999';
       ghost.style.width = li.offsetWidth + 'px';
-      ghost.style.transition = 'transform 0.15s ease'; // smooth movement
+      ghost.style.transition = 'transform 0.15s ease';
       document.body.appendChild(ghost);
     });
 
@@ -167,7 +170,6 @@
 
       document.querySelectorAll('.teams ul').forEach(zone => zone.classList.remove('drag-over'));
 
-      // Remove ghost
       if (ghost) {
         ghost.remove();
         ghost = null;
@@ -199,12 +201,10 @@
 
     const li = document.createElement('li');
     li.textContent = name;
-
     li.style.fontSize = "0.9rem";
     li.style.padding = "10px";
 
     makeDraggable(li, 'player-' + Date.now());
-
     document.getElementById('availablePlayers').appendChild(li);
     document.getElementById('playerName').value = '';
   });
@@ -278,6 +278,16 @@
   document.getElementById('backToTop').addEventListener('click', () => {
     document.getElementById('team-management').scrollIntoView({ behavior: 'smooth' });
   });
+
+  // Toggle Add Player bar (mobile)
+  const toggleBtn = document.getElementById('toggleAddPlayer');
+  const addPlayerBar = document.getElementById('addPlayerBar');
+  if (toggleBtn && addPlayerBar) {
+    toggleBtn.addEventListener('click', () => {
+      addPlayerBar.classList.toggle('active');
+      toggleBtn.textContent = addPlayerBar.classList.contains('active') ? '×' : '+';
+    });
+  }
 </script>
 </body>
 </html>
