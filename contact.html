@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Redfall FC</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="Redfall.png" alt="Redfall FC Logo">
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </header>
+
+  <!-- Contact Hero -->
+  <section class="hero contact-hero">
+    <h1>Get in Touch</h1>
+    <p>We’d love to hear from you — whether you’re a player, supporter, or sponsor.</p>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-form">
+    <h2>Send Us a Message</h2>
+    <form action="#" method="post">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Club Details -->
+  <section class="club-details">
+    <h2>Club Information</h2>
+    <p><strong>Email:</strong> shravan26m@icloud.com</p>
+    <p><strong>Phone:</strong> +27 82 054 8366</p>
+    <p><strong>Location:</strong> Waterfall, Johannesburg, South Africa</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Redfall FC | Community, Pride, Passion</p>
+  </footer>
+
+  <!-- Mobile Menu Script -->
+  <script>
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
