@@ -118,6 +118,24 @@
   user-select: none;
 }
 
+/* Dragging state (real card) */
+#availablePlayers li.dragging,
+#teamA li.dragging,
+#teamB li.dragging {
+  transform: scale(1.05);
+  opacity: 0.6;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* Drop zone highlight */
+#availablePlayers.drag-over,
+#teamA.drag-over,
+#teamB.drag-over {
+  border: 2px dashed #007bff;
+  background: rgba(0, 123, 255, 0.1);
+}
+
 /* Drop zone hover effect */
 .team.drop-hover {
   border: 2px dashed #ff9800; /* Orange highlight for Team A */
