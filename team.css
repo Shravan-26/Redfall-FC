@@ -189,7 +189,7 @@ li.dragging {
 @media (max-width: 768px) {
   .add-player {
     position: fixed;
-    bottom: 0;
+    top: 0;                 /* move to top */
     left: 0;
     right: 0;
     background: #007bff;
@@ -197,11 +197,12 @@ li.dragging {
     display: flex;
     gap: 10px;
     z-index: 1000;
-    transform: translateY(100%); /* hidden by default */
+    transform: translateY(-100%); /* hidden by default, slides down */
     transition: transform 0.3s ease;
     flex-direction: column;
   }
   .add-player.active { transform: translateY(0); }
+
   .add-player input,
   .add-player button {
     width: 100%;
@@ -215,10 +216,11 @@ li.dragging {
     color: #007bff;
     font-weight: bold;
   }
+
   /* Toggle button */
   .toggle-add-player {
     position: fixed;
-    bottom: 60px;
+    top: 60px;              /* sits just below the bar */
     right: 20px;
     background: #007bff;
     color: #fff;
@@ -230,6 +232,12 @@ li.dragging {
     z-index: 1001;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3);
   }
+
+  /* Add spacing at top so content isn't hidden behind bar */
+  #team-management {
+    padding-top: 120px;     /* adjust based on bar height */
+  }
+}
   /* Sticky footer buttons */
   .buttons {
     position: fixed;
