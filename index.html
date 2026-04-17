@@ -33,10 +33,29 @@
     </div>
   </section>
 
-  <!-- Club Story Preview -->
-  <section class="club-preview">
-    <h2>Our Journey</h2>
-    <p>Founded by residents of Waterfall, Redfall FC has grown into a vibrant social football club. Over the years, players have come and gone, but our spirit remains strong — united by the love of football and community pride.</p>
+  <!-- Club Values -->
+  <section class="club-values">
+    <h2>Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card">
+        <h3>Passion</h3>
+        <p>We play with heart and energy, bringing excitement to every match.</p>
+      </div>
+      <div class="value-card">
+        <h3>Community</h3>
+        <p>Our club is built on friendship, support, and pride in Waterfall.</p>
+      </div>
+      <div class="value-card">
+        <h3>Growth</h3>
+        <p>We nurture talent and encourage players to reach their full potential.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Club -->
+  <section class="social-club">
+    <h2>More Than Football</h2>
+    <p>Redfall FC is a social hub. From weekend matches to community events, we bring people together both on and off the pitch.</p>
   </section>
 
   <!-- Join Us -->
@@ -58,7 +77,21 @@
     hamburger.addEventListener('click', () => {
       navLinks.classList.toggle('active');
     });
+
+    // Section fade-in animation
+    const sections = document.querySelectorAll("section");
+    const revealOnScroll = () => {
+      sections.forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add("visible");
+        }
+      });
+    };
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
   </script>
 </body>
 </html>
+
 
