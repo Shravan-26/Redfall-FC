@@ -79,17 +79,25 @@
 }
 
 #availablePlayers li {
-  background: #28a745; /* Bright green */
+  background: #e0e0e0; /* Neutral light gray */
   margin: 5px 0;
-  padding: 14px; /* larger touch target */
+  padding: 10px;       /* smaller card size */
   border-radius: 6px;
   cursor: grab;
-  color: #fff;
+  color: #000;         /* dark text for readability */
+  font-size: 0.9rem;   /* smaller text */
   font-weight: bold;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
   touch-action: none;
   user-select: none;
+  border: 1px solid #000; /* thin border for visibility */
 }
+
+#availablePlayers li:hover {
+  background: #d5d5d5; /* slightly darker gray on hover */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle hover shadow */
+}
+
 
 /* Drag handle */
 .drag-handle {
